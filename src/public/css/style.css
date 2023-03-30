@@ -1,3 +1,66 @@
+/* Import font from Google */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap');
+
+:root {
+  margin: 0;
+  padding: 0;
+  
+  /* Set font family */
+  font-family: 'Barlow Condensed', sans-serif;
+
+  /* Set global variables */
+  --background-color: #F9F7F7;
+  --main-txt-color: #112D4E;
+  --accent-color: #3F72AF;
+  --highlight-color: #DBE2EF;
+}
+
+/* Set default colors & font sizes to keep the design consistent */
 h1 {
-  color: red;
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 2.375em;
+}
+
+h3 {
+  font-size: 1.750em;
+}
+
+h4 {
+  font-size: 1.500em;
+}
+
+p {
+  font-size: 1.125em;
+}
+
+body {
+  background-color: var(--background-colour);
+  color: var(--main-txt-color);
+}
+
+input {
+  border-radius: 1em;
+  border: 2px solid var(--accent-color);
+}
+
+#weather-selector {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  padding: 2em;
+}
+
+/* Location search bar */
+#search-location {
+  background-image: url('/images/search-icon.png');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-position: 10px;
+  background-size: 32px;
+  width: 50%;
+  padding: 0.5em 1em 0.5em 2em;
+  font-size: 1.5000em;
 }
