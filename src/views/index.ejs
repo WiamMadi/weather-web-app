@@ -1,44 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather App</title>
 
-    <link href="/css/style.css" rel="stylesheet" type="text/css">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App</title>
 
-  </head>
-  </style>
+  <link href="/css/style.css" rel="stylesheet" type="text/css">
 
-  <body>
-    <!-- Location & Preference Input -->
-    <form id="weather-selector">
-      <!-- Location -->
-      <input type="text" id="search-location" name="search-location" placeholder="Search for any city..."/>
+</head>
+</style>
 
-      <!-- Tempature Preference Selector -->
-      <!-- <select name="select-tempature" id="select-tempature">
-        <option value="celsius">C</option>
-        <option value="fahrenheit">F</option>
-      </select> -->
-    </form>
+<body>
 
-    <!-- Current Location -->
-    <h2>Current Location</h2>
+  <!-- Location Form -->
+  <form id="location-finder" method="post" action="/">
+    <!-- Location -->
+    <input type="text" id="location" name="location" list="locations" placeholder="Search for any city..." />
 
-    <!-- Current Weather -->
-    <h2>Condition -> sunny, cloudy, etc...</h2>
+    <datalist id="locations">
 
-    <!-- Daily Weather -->
-    <div class="flex-container">
-      <div>1</div>
-      <div>2</div>
-      <div>3</div>
-      <div>4</div>
-      <div>5</div>
-      <div>6</div>
-      <div>7</div>
-    </div>
-  </body>
+      <% features.forEach(function(ft) { %>
+        <option><%= ft.properties.formatted %></option>
+     <% }); %>     
+
+    </datalist>
+
+  </form>
+
+  <!-- Current Location -->
+  <h2>Current Location</h2>
+
+  <!-- Current Weather -->
+  <h2>Condition -> sunny, cloudy, etc...</h2>
+
+  <!-- Daily Weather -->
+  <div class="flex-container">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+  </div>
+</body>
+
 </html>

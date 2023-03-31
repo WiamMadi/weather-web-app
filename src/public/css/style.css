@@ -46,7 +46,7 @@ input {
   border: 2px solid var(--accent-color);
 }
 
-#weather-selector {
+#location-finder {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
@@ -54,7 +54,7 @@ input {
 }
 
 /* Location search bar */
-#search-location {
+#location {
   background-image: url('/images/search-icon.png');
   background-repeat: no-repeat;
   background-position: left center;
