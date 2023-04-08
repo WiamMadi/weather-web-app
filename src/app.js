@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 
 import getLocation from "./services/location.service.js";
 
-import getAutocomplete from "./services/autocomplete.service.js";
+import getAutoComplete from "./services/autocomplete.service.js";
 
 /* Getting current directory */
 const __filename = fileURLToPath(import.meta.url);
@@ -25,23 +25,44 @@ app.use(express.static(path.join(__dirname, "public")));
 
 /* Express routes */
 app.get("/", (req, res) => {
-  let features = [
-  ];
-
-  res.render("index.ejs", { features: features });
+  res.render("index.ejs", { location: "" });
 });
 
 app.post("/", (req, res) => {
   let location = req.body.location;
 
-  if (location) {
-    getAutocomplete(location).then(res2 => {
-      let features = res2["features"];
-      res.update({features: features});
+  console.log(location);
 
+  getAutoComplete(location).then(response => {
+
+    let responseArray = [];
+
+    response.features.forEach(feature => {
+
+      // Make sure a valid city is returned 
+      if (!feature.properties.city) return;
+
+      // Create response date
+      let responseData = {
+        city: feature.properties.city,
+        state: feature.properties.state_code,
+        country: feature.properties.country,
+        lon: feature.properties.lon,
+        lat: feature.properties.lat
+      };
+
+      // Add data to array
+      responseArray.push(responseData);
     });
-    console.log(req.body.location);  
-  }
+
+    // Return data (success)
+    res.status(200).json(responseArray);
+
+  }).catch(err => {
+    
+    // Send error info (fail)
+    res.status(err.status).json(err);
+  });
 });
 
 /* Start server and listen on provided port */

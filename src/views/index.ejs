@@ -8,26 +8,24 @@
   <title>Weather App</title>
 
   <link href="/css/style.css" rel="stylesheet" type="text/css">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="/javascript/autocomplete.js"></script>
+  
 </head>
 </style>
 
 <body>
 
   <!-- Location Form -->
-  <form id="location-finder" method="post" action="/">
+  <form id="location-finder" method="post">
     <!-- Location -->
-    <input type="text" id="location" name="location" list="locations" placeholder="Search for any city..." />
-
-    <datalist id="locations">
-
-      <% features.forEach(function(ft) { %>
-        <option><%= ft.properties.formatted %></option>
-     <% }); %>     
+    <input type="text" id="location" name="location" list="available-locations" autocomplete="off" placeholder="Search for any city..." />
+    <datalist id="available-locations">
 
     </datalist>
-
   </form>
+
+  <h1 id="testTitle"><%=location%></h1>
 
   <!-- Current Location -->
   <h2>Current Location</h2>
