@@ -31,8 +31,12 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
   let location = req.body.location;
 
+  // Make sure a valid input is given
+  if (!location) return;
+
   console.log(location);
 
+  // Call to API to retrieve available world locations
   getAutoComplete(location).then(response => {
 
     let responseArray = [];
@@ -42,7 +46,7 @@ app.post("/", (req, res) => {
       // Make sure a valid city is returned 
       if (!feature.properties.city) return;
 
-      // Create response date
+      // Create response data
       let responseData = {
         city: feature.properties.city,
         state: feature.properties.state_code,
