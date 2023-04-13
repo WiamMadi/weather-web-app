@@ -4,9 +4,7 @@ import express from "express";
 
 import bodyParser from "body-parser";
 
-import getLocation from "./services/location.service.js";
-
-import getAutoComplete from "./services/autocomplete.service.js";
+import autocompleteRoute from "./routes/autocomplete.route.js";
 
 /* Getting current directory */
 const __filename = fileURLToPath(import.meta.url);
@@ -25,49 +23,10 @@ app.use(express.static(path.join(__dirname, "public")));
 
 /* Express routes */
 app.get("/", (req, res) => {
-  res.render("index.ejs", { location: "" });
+  res.render("index.ejs", { currentLocation: "", currentWeather: "" });
 });
 
-app.post("/", (req, res) => {
-  let location = req.body.location;
-
-  // Make sure a valid input is given
-  if (!location) return;
-
-  console.log(location);
-
-  // Call to API to retrieve available world locations
-  getAutoComplete(location).then(response => {
-
-    let responseArray = [];
-
-    response.features.forEach(feature => {
-
-      // Make sure a valid city is returned 
-      if (!feature.properties.city) return;
-
-      // Create response data
-      let responseData = {
-        city: feature.properties.city,
-        state: feature.properties.state_code,
-        country: feature.properties.country,
-        lon: feature.properties.lon,
-        lat: feature.properties.lat
-      };
-
-      // Add data to array
-      responseArray.push(responseData);
-    });
-
-    // Return data (success)
-    res.status(200).json(responseArray);
-
-  }).catch(err => {
-    
-    // Send error info (fail)
-    res.status(err.status).json(err);
-  });
-});
+app.post("/autocomplete", autocompleteRoute);
 
 /* Start server and listen on provided port */
 app.listen(port, () => {

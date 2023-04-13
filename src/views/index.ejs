@@ -10,6 +10,7 @@
   <link href="/css/style.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script src="/javascript/autocomplete.js"></script>
+  <script src="/javascript/weather.js"></script>
   
 </head>
 </style>
@@ -25,13 +26,11 @@
     </datalist>
   </form>
 
-  <h1 id="testTitle"><%=location%></h1>
-
   <!-- Current Location -->
-  <h2>Current Location</h2>
+  <h2><%=currentLocation%></h2>
 
   <!-- Current Weather -->
-  <h2>Condition -> sunny, cloudy, etc...</h2>
+  <h2><%=currentWeather%></h2>
 
   <!-- Daily Weather -->
   <div class="flex-container">

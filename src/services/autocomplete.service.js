@@ -28,23 +28,3 @@ export default async function getAutocomplete(query) {
     return JSON.parse(text);
   });
 }
-
-/*
-export default async function getAutocomplete(query) {
-  return await fetch(
-    geoapifyUrl + query + "&apiKey=" + process.env.GEOAPIFY_API_KEY
-  )
-    .then((response) => {
-      // Error Handling
-      try {
-        checkStatus(response);
-        return response.text();
-      } catch (error) {
-        //console.log(error);
-        return error.testttt;
-      }
-    })
-    .then((text) => {
-      return JSON.parse(text);
-    });
-}*/
