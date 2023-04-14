@@ -15,10 +15,18 @@ export default async function getLocation() {
         checkStatus(response);
         return response.text();
       } catch (error) {
+        // Console log the error
         console.error(error);
+
+        // Return the error status and the message
+        return {
+          status: error.status,
+          message: error.message,
+        };
       }
     })
     .then((text) => {
+      // Convert response text to JSON
       return JSON.parse(text);
     });
 }

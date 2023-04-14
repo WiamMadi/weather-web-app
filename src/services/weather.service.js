@@ -17,7 +17,13 @@ export async function getWeatherByCity(city) {
         checkStatus(response);
         return response.text();
       } catch (error) {
+        // Console log the error
         console.error(error);
+        // Return the error status and the message
+        return {
+          status: error.status,
+          message: error.message,
+        };
       }
     })
     .then((text) => {
@@ -34,7 +40,13 @@ export async function getWeatherByLL(latitude, longitude) {
         checkStatus(response);
         return response.text();
       } catch (error) {
+        // Console log the error
         console.error(error);
+        // Return the error status and the message
+        return {
+          status: error.status,
+          message: error.message,
+        };
       }
     })
     .then((text) => {

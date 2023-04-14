@@ -29,8 +29,8 @@ export default (req, res) => {
           lat: feature.properties.lat,
         };
 
-        // Check for duplicate before adding to response array
-        if (hasDuplicateItems(newLocation)) return;
+        // Check for duplicates before adding to response array
+        if (isDuplicateItem(newLocation)) return;
 
         // Add data to array
         availableLocations.push(newLocation);
@@ -47,7 +47,7 @@ export default (req, res) => {
     });
 };
 
-function hasDuplicateItems(data) {
+function isDuplicateItem(data) {
   return availableLocations.find((location) => {
     return (
       location.city === data.city &&
