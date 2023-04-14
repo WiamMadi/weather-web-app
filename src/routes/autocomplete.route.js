@@ -1,6 +1,11 @@
 import getAutocomplete from "../services/autocomplete.service.js";
 
+let availableLocations = [];
+
 export default (req, res) => {
+  // Clear any existing locations in array
+  availableLocations = [];
+
   // Location typed by user
   let location = req.body.location;
 
@@ -10,14 +15,13 @@ export default (req, res) => {
   // Call to API to retrieve available world locations
   getAutocomplete(location)
     .then((response) => {
-      let responseArray = [];
 
       response.features.forEach((feature) => {
         // Make sure a valid city is returned
         if (!feature.properties.city) return;
 
         // Create response data
-        let responseData = {
+        let newLocation = {
           city: feature.properties.city,
           state: feature.properties.state_code,
           country: feature.properties.country,
@@ -25,15 +29,30 @@ export default (req, res) => {
           lat: feature.properties.lat,
         };
 
+        // Check for duplicate before adding to response array
+        if (hasDuplicateItems(newLocation)) return;
+
         // Add data to array
-        responseArray.push(responseData);
+        availableLocations.push(newLocation);
       });
 
+      console.log(availableLocations);
+
       // Return data (success)
-      res.status(200).json(responseArray);
+      res.status(200).json(availableLocations);
     })
     .catch((err) => {
       // Send error info (fail)
       res.status(err.status).json(err);
     });
 };
+
+function hasDuplicateItems(data) {
+  return availableLocations.find((location) => {
+    return (
+      location.city === data.city &&
+      location.state === data.state &&
+      location.country === data.country
+    );
+  });
+}

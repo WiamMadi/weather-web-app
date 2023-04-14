@@ -4,7 +4,8 @@ $(function () {
 
   // Auto call API for autocomplete information after a user is done typing
   $("#location").on("keyup", function () {
-    // Reset canAutocomplete
+
+    // Allow autocomplete to work
     if (!canAutocomplete) canAutocomplete = true;
 
     // Reset timer if a user keeps typing
